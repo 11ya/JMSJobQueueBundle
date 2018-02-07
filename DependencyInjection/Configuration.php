@@ -39,7 +39,8 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->booleanNode('statistics')->defaultTrue()->end();
+                ->booleanNode('statistics')->defaultTrue()->end()
+                ->booleanNode('related_entities')->defaultTrue()->end();
 
         $defaultOptionsNode = $rootNode
             ->children()

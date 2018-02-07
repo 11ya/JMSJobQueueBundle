@@ -15,16 +15,16 @@
         <service id="jms_job_queue.retry_scheduler" class="%jms_job_queue.retry_scheduler.class%" />
         <service id="jms_job_queue.scheduler_registry" class="%jms_job_queue.scheduler_registry.class%" />
 
-        <service id="jms_job_queue.entity.many_to_any_listener" class="%jms_job_queue.entity.many_to_any_listener.class%">
-            <argument type="service" id="doctrine" />
-            <tag name="doctrine.event_listener" lazy="true" event="postGenerateSchema" />
-            <tag name="doctrine.event_listener" lazy="true" event="postLoad" />
-            <tag name="doctrine.event_listener" lazy="true" event="postPersist" />
-            <tag name="doctrine.event_listener" lazy="true" event="preRemove" />
-        </service>
-
         <service id="jms_job_queue.twig.extension" class="%jms_job_queue.twig.extension.class%">
             <tag name="twig.extension" />
+        </service>
+        <service id="JMS\JobQueueBundle\Entity\Repository\JobRepository">
+            <call method="setDispatcher">
+                <argument type="service" id="event_dispatcher" />
+            </call>
+            <call method="setRetryScheduler">
+                <argument type="service" id="jms_job_queue.retry_scheduler" />
+            </call>
         </service>
     </services>
 </container>

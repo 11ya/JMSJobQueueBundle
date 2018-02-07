@@ -48,6 +48,11 @@ class JMSJobQueueExtension extends Extension implements PrependExtensionInterfac
             $loader->load('statistics.xml');
         }
 
+        $container->setParameter('jms_job_queue.related_entities', $config['related_entities']);
+        if ($config['related_entities']) {
+            $loader->load('related_entities.xml');
+        }
+
         $container->setParameter('jms_job_queue.queue_options_defaults', $config['queue_options_defaults']);
         $container->setParameter('jms_job_queue.queue_options', $config['queue_options']);
     }

@@ -157,6 +157,9 @@ class JobRepository extends EntityRepository
 
     public function findAllForRelatedEntity($relatedEntity)
     {
+        if (!$this->registry) {
+            return [];
+        }
         list($relClass, $relId) = $this->getRelatedEntityIdentifier($relatedEntity);
 
         $rsm = new ResultSetMappingBuilder($this->_em);
